@@ -1,0 +1,144 @@
+RETAIL PROFITABILITY INTELLIGENCE SYSTEM
+DATA QUALITY ASSESSMENT — INITIAL INSPECTION
+
+1. DATASET OVERVIEW
+
+* Dataset: Sample Superstore
+* Original file: sample_-_superstore.xls
+* Total records: 10,194
+* Total columns: 21
+
+2. MISSING VALUES
+
+* No missing values were detected in any column during the initial inspection.
+* Further validation may still be needed for blank strings or invalid placeholder values.
+
+3. DUPLICATE RECORDS
+
+* No duplicate Row ID values were found.
+* No fully identical rows were found when all 21 columns were compared.
+* Four records matched across all columns except Row ID.
+* These records form two suspected duplicate pairs:
+
+  * Row IDs 391 and 392
+  * Row IDs 1699 and 1700
+* These records require further investigation before any removal decision.
+
+4. DATE VALIDATION
+
+* No records were found where Ship Date preceded Order Date.
+* Both date columns were successfully interpreted as dates.
+
+5. NUMERICAL VALIDATION
+
+* All Sales values were greater than zero.
+* All Quantity values were greater than zero.
+* Discount values ranged from 0.0 to 0.8.
+* Profit contains both positive and negative values. Negative profit may represent legitimate business losses and should not automatically be treated as an error.
+
+6. TEXT VALIDATION
+
+* No leading or trailing spaces were detected in the checked text columns.
+* Additional checks may be needed for inconsistent capitalization, spelling, and category labels.
+
+7. CLEANING DECISIONS
+
+* The original dataset will remain unchanged.
+* No records have been deleted or modified.
+* Suspected duplicates will be investigated before a final decision.
+* All cleaning decisions will be documented and validated.
+
+STATUS: INITIAL INSPECTION COMPLETED
+
+8. POSTAL CODE INVESTIGATION
+
+* The Postal Code column contains mixed Python data types: integers and strings.
+* No missing Postal Code values were detected.
+* The dataset contains 9,994 United States records and 200 Canada records.
+* All 438 four-digit US ZIP-code records belong to six northeastern states where ZIP codes can begin with zero.
+* A preview confirmed that zero-padding restores the expected five-character format for examples such as 7036 → 07036.
+* The 200 Canadian records contain three-character postal-code prefixes rather than complete Canadian postal codes.
+* Planned cleaning: store postal codes as text and zero-pad four-digit US ZIP codes to five characters.
+* Original postal codes will be preserved in the raw dataset. No corrections have been applied to the source file.
+
+9. CATEGORICAL CONSISTENCY
+
+* Checked Ship Mode, Segment, Country/Region, Region, Category, and Sub-Category.
+* No leading or trailing spaces were detected in these columns.
+* No blank strings were detected in these columns.
+* The observed category labels are consistent in spelling and capitalization.
+* No categorical values required correction during this check.
+
+10. PRELIMINARY PROFITABILITY ANALYSIS
+
+- Total sales: 2,326,534.35
+- Total profit: 292,296.81
+- Average profit per record: 28.67
+
+- Records with discounts of 0% and 20% generated positive total profit.
+- Discount levels of 30%, 32%, 40%, 45%, 50%, 60%, 70%, and 80% showed negative total profit.
+- The 70% discount group had the largest total loss among the discount levels, at -40,300.57.
+- These results indicate an association between higher discount levels and lower profitability in this dataset.
+- Further analysis by product category, sub-category, and sales volume is required before drawing causal conclusions.
+
+STATUS: PRELIMINARY FINDINGS RECORDED
+
+11. PROFITABILITY BY CATEGORY
+
+- Technology generated the highest total sales (839,893.28) and total profit (146,543.38).
+- Office Supplies generated total profit of 126,023.44.
+- Furniture generated the lowest total profit (19,730.00).
+- Technology had the highest average profit per record (78.58).
+- Furniture had the lowest average profit per record (8.96).
+- Furniture profitability should be investigated further at the sub-category level.
+- These findings describe the observed dataset and do not establish the causes of profitability differences.
+
+STATUS: CATEGORY ANALYSIS COMPLETED 
+
+12. PROFITABILITY BY SUB-CATEGORY
+
+* Tables recorded the largest total loss, at -17,753.21, despite generating 208,020.18 in sales.
+* Bookcases recorded a total loss of -3,632.07.
+* Supplies recorded a total loss of -1,171.39.
+* Copiers generated the highest total profit, at 56,093.94.
+* Phones generated total profit of 45,050.83.
+* Accessories generated total profit of 41,936.64.
+* Copiers had a notably high average profit per record, but this result should be investigated further because the sub-category contains only 70 records.
+* Tables, Bookcases, and Supplies should be investigated to identify factors associated with their negative profitability.
+* These findings are descriptive and do not establish the causes of losses or profits.
+
+STATUS: SUB-CATEGORY ANALYSIS COMPLETED
+
+13. TABLES PROFITABILITY BY DISCOUNT
+
+* Tables records with no discount generated total profit of 13,334.92.
+* At a 20% discount, Tables recorded a small total loss of -298.40.
+* At a 40% discount, Tables recorded the largest total loss of -16,187.40.
+* At a 50% discount, the average profit per record was -239.32.
+* Higher discount levels were associated with lower profitability in this analysis.
+* Product-level and sales-volume analysis is needed before recommending specific discount changes.
+* These findings show an association and do not establish causation.
+
+STATUS: TABLES DISCOUNT ANALYSIS COMPLETED
+
+14. Discount vs Profitability Analysis
+
+- Records with no discount generated the highest total profit of $326,718.59.
+- Discount levels from 0% through 20% had positive total profit.
+- Discount levels from 30% through 80% had negative total profit.
+- The 70% discount level recorded the largest aggregate loss of $40,300.57 across 424 records.
+- The 80% discount level recorded the lowest profit margin at -180.01%.
+- These findings indicate an association between higher discount levels and weaker profitability in this dataset. They do not establish that discounts alone caused the losses.
+- Recommended follow-up: investigate loss-making products, regional differences, and order-level transactions before recommending discount policy changes.
+
+15. Monthly Sales and Profit Analysis**
+
+* Monthly sales and profit were analyzed from January 2023 through December 2026.
+* November 2026 recorded the highest monthly sales at $118,454.50.
+* February 2023 recorded the lowest monthly sales at $4,519.89.
+* December 2025 recorded the highest monthly profit at $17,926.30.
+* January 2024 recorded the largest monthly loss at $3,189.80.
+* July 2023 also recorded a loss of $841.48.
+* September and November showed relatively high sales in multiple years, suggesting a possible seasonal pattern that requires further validation.
+* High sales do not necessarily translate into the highest profit.
+* Recommended follow-up: compare annual performance, investigate loss-making months, and examine monthly discount and product-category patterns before drawing conclusions.
